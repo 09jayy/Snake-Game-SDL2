@@ -1,14 +1,29 @@
 #include "Entity.h"
+#include <iostream>
+#include <string>
 
 Entity::Entity(SDL_Renderer* renderer, const char* texturePath, int x, int y, int width, int height) {
 	this->x = x;
 	this->y = y;
 	this->width = width;
 	this->height = height;
+	this->name = "";
 
 	SDL_Surface* surface = IMG_Load(texturePath);
 	texture = SDL_CreateTextureFromSurface(renderer, surface);
 	SDL_FreeSurface(surface); 
+}
+
+Entity::Entity(SDL_Renderer* renderer, const char* texturePath, int x, int y, int width, int height, std::string objName) {
+	this->x = x;
+	this->y = y;
+	this->width = width;
+	this->height = height;
+	this->name = objName;
+
+	SDL_Surface* surface = IMG_Load(texturePath);
+	texture = SDL_CreateTextureFromSurface(renderer, surface);
+	SDL_FreeSurface(surface);
 }
 
 void Entity::render(SDL_Renderer* renderer) {
@@ -28,5 +43,6 @@ void Entity::render(SDL_Renderer* renderer) {
 }
 
 Entity::~Entity() {
+	std::cout << "Entity destroyed" << this->getName() << "\n";
 	SDL_DestroyTexture(texture);
 }
