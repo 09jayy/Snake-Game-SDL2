@@ -43,6 +43,6 @@ void Entity::render(SDL_Renderer* renderer) {
 }
 
 Entity::~Entity() {
-	std::cout << "Entity destroyed" << this->getName() << "\n";
+	std::cout << "Entity destroyed: " << this->getName() << "\n";
 	SDL_DestroyTexture(texture);
 }
