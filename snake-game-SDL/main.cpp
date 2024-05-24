@@ -4,7 +4,7 @@ Game* game = nullptr;
 
 int main(int argc, char* argv[]) {
 
-    const int FPS = 30; 
+    const int FPS = 10; 
 
     Uint32 elapsed = 0; 
     int frameTime = 0; 
@@ -14,12 +14,12 @@ int main(int argc, char* argv[]) {
 
     while (game->running()) {
         elapsed = SDL_GetTicks(); 
+
         game->handleEvents(); 
         game->update(); 
         game->render(); 
 
         frameTime = SDL_GetTicks() - elapsed; 
-
         if (1000 / FPS > frameTime) {
             SDL_Delay((1000 / FPS) - frameTime);
         }; 
