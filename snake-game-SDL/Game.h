@@ -7,7 +7,7 @@ class Game {
 private: 
 	bool isRunning; 
 	SDL_Window* window; 
-	SDL_Renderer* renderer; 
+	static SDL_Renderer* renderer; 
 	bool hasFailed; 
 
 	// sprites
@@ -25,4 +25,6 @@ public:
 	
 	bool running() { return isRunning; };
 	void fail();
+
+	static SDL_Renderer* getRenderer() { return renderer; }; 
 };

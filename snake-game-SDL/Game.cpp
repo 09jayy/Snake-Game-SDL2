@@ -7,12 +7,16 @@
 #include "SDL_ttf.h"
 #include "Text.h"
 
+SDL_Renderer* Game::renderer = nullptr; 
+
 // default methods for constructor and destructure
-Game::Game() : isRunning(false), renderer(nullptr), window(nullptr), hasFailed(false), snake(nullptr), apple(nullptr) {};
+Game::Game() : isRunning(false), window(nullptr), hasFailed(false), snake(nullptr), apple(nullptr) {};
 Game::~Game() {};
 
 void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen) {
 	int flags = 0;
+	const std::vector<const char*> HEAD_TEXTURES = {"assets/head_down.png", "assets/head_left.png", "assets/head_right.png", "assets/head_up.png"}; 
+	const std::vector<const char*> TAIL_TEXTURES = { "assets/tail_down.png", "assets/tail_left.png", "assets/tail_right.png", "assets/tail_down.png" }; 
 
 	if (fullscreen) {
 		flags = SDL_WINDOW_FULLSCREEN;
@@ -41,10 +45,12 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	}
 
 	// create apple
-	Game::apple = new Entity(renderer, "assets/apple.png", 100, 100, 40, 40, "apple");
+	Game::apple = new Entity(100, 100, 40, 40, "apple");
+	apple->setTexture(renderer, "assets/apple.png"); 
 
 	// create snake
 	Game::snake = new Snake(renderer); 
+	snake->getHead()->
 };
 
 void Game::fail() {
@@ -63,15 +69,19 @@ void Game::handleEvents() {
 		switch (event.key.keysym.scancode) {
 			case SDL_SCANCODE_UP:
 				std::cout << "up" << "\n";
+				snake->changeDirection('n'); 
 				break; 
 			case SDL_SCANCODE_DOWN:
 				std::cout << "down" << "\n";
+				snake->changeDirection('s'); 
 				break; 
 			case SDL_SCANCODE_LEFT:
 				std::cout << "left" << "\n";
+				snake->changeDirection('w'); 
 				break; 
 			case SDL_SCANCODE_RIGHT:
 				std::cout << "right" << "\n";
+				snake->changeDirection('e'); 
 				break; 
 			default:
 				break; 

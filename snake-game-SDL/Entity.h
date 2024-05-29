@@ -9,11 +9,15 @@ protected:
 	std::string name;  
 	int x, y; 
 	int width, height;
+private: 
 	SDL_Texture* texture;
 public:
-	Entity(SDL_Renderer* renderer, const char* texturePath, int x, int y, int width, int height);
+	Entity(int x, int y, int width, int height);
 
-	Entity(SDL_Renderer* renderer, const char* texturePath, int x, int y, int width, int height, std::string objName);
+	Entity(int x, int y, int width, int height, std::string objName);
+
+	void setTexture(SDL_Renderer* renderer, const char* texturePath); 
+	static SDL_Texture* createTextureFromPath(SDL_Renderer* renderer, const char* path); 
 
 	void render(SDL_Renderer* renderer);
 
