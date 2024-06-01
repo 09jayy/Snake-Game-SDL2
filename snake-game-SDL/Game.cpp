@@ -50,7 +50,6 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	// create snake
 	Game::snake = new Snake(renderer); 
-	snake->getHead()->
 };
 
 void Game::fail() {
@@ -94,7 +93,9 @@ void Game::handleEvents() {
 
 void Game::update() {
 	// move snake
-	snake->move(); 
+	if (!hasFailed){
+		snake->move(); 
+	}
 
 	//check if the snake is out of bounds
 	if (snake->isOutOfBounds()) {
@@ -106,15 +107,14 @@ void Game::render() {
 	//clear renderer buffer
 	SDL_RenderClear(renderer);  
 
-	if (!hasFailed) {
-		// render apple
-		apple->render(renderer);
+	// render apple
+	apple->render(renderer);
 
-		// render snake
-		snake->render(renderer);
-	}
-	else {
-		Text gameOver("GAME OVER", "Minecraft.ttf",48);
+	// render snake
+	snake->render();
+
+	if (hasFailed) {
+		Text gameOver("GAME OVER", "Minecraft.ttf", 48);
 		gameOver.setPosition("CENTER");
 		gameOver.render(renderer);
 	}

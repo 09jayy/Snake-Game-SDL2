@@ -27,11 +27,11 @@ void Entity::setTexture(SDL_Renderer* renderer, const char* texturePath) {
 }
 
 SDL_Texture* Entity::createTextureFromPath(SDL_Renderer* renderer, const char* path) {
-	SDL_Surface* sur = IMG_Load(path); 
-	SDL_Texture* tex = SDL_CreateTextureFromSurface(renderer, sur); 
+	SDL_Surface* sur = IMG_Load(path);
+	SDL_Texture* tex = SDL_CreateTextureFromSurface(renderer, sur);
 	SDL_FreeSurface(sur);
-	return tex; 
-}
+	return tex;
+}; 
 
 void Entity::render(SDL_Renderer* renderer) {
 	SDL_Rect srcRect;
