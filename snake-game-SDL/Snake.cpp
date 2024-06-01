@@ -1,33 +1,52 @@
 #include "Snake.h"
+#include "SDL.h"
+#include <iostream>
+#include <vector>
+#include "Game.h" 
+#include "Snake_Ends.h"
+#include "Snake_Body.h"
 
 Snake::Snake(SDL_Renderer* renderer) {
-	const int WIDTH_HEIGHT = 40; // width of 1 snake body part
+	int WIDTH_HEIGHT = 40; // width of 1 snake body part
 	
-	head = new Snake_Body(renderer, "assets/head_right.png", 120, 400, WIDTH_HEIGHT, WIDTH_HEIGHT, "head");
-	tail = new Snake_Body(renderer, "assets/tail_left.png", 80, 400, WIDTH_HEIGHT, WIDTH_HEIGHT,"tail"); 
+	head = new Snake_Ends(120, 400, WIDTH_HEIGHT, WIDTH_HEIGHT, "head");
+
+	std::cout << "head created" << "\n"; 
+
+	tail = new Snake_Ends(0, 400, WIDTH_HEIGHT, WIDTH_HEIGHT,"tail");  
+
+	// add body test
 	body.push_back(head); 
+	body.push_back(new Snake_Body(80, 400, WIDTH_HEIGHT, WIDTH_HEIGHT, "body 1"));
+	body.push_back(new Snake_Body(40, 400, WIDTH_HEIGHT, WIDTH_HEIGHT, "body 2"));
+
+	std::cout << "tail created" << "\n"; 
 }
 
-void Snake::render(SDL_Renderer* renderer) {
-	head->render(renderer);
-	for (int i = 0; i < body.size(); i++) {
-		body[i]->render(renderer);
-	};
-	tail->render(renderer);
+void Snake::render() {
+	std::cout << "RENDER SNAKE" << "\n";
+
+	head->render(Snake_Ends::getHeadTextures());
+
+	for (int i = 1; i < body.size(); i++) {
+		body[i]->render(); 
+	}
+
+	tail->render(Snake_Ends::getTailTextures());
 }
 
 void Snake::move() {
-	// move head
-	getHead()->move(); 
+	tail->move( (body.size() == 1) ? head : body[body.size() - 1] );
 
-	//move body
-	//std::cout << body.size() << "\n"; 
-	for (int i = 1; i < body.size(); i++) {
-		body[i]->move();
-	};  
+	if (body.size() >= 1) {
+		for (int i = body.size() - 1; i >= 1; i--) {
+			std::cout << "BODY " << i << " DIRECTION: " << body[i]->getDirection() << "\n";
+			body[i]->move(body[i - 1]); 
+		}
+	}
 
-	//move tail
-	getTail()->move(); 
+	std::cout << "HEAD DIRECTION: " << head->getDirection() << "\n";
+	head->moveHead(); 
 }
 
 bool Snake::checkCollision() {
@@ -42,7 +61,16 @@ bool Snake::isOutOfBounds(){
 		return false; 
 	}
 }
+
+void Snake::changeDirection(char change) {
+	if (Snake_Body::getOpposite(change) != head->getDirection()) {
+		head->setDirection(change); 
+		std::cout<< "DIRECTION HAS CHANGED OF HEAD" << "\n";
+	}
+}
  
+void Snake::grow(SDL_Renderer* renderer) {
+}
 
 Snake::~Snake() {
 	delete head;

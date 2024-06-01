@@ -5,7 +5,7 @@ Text::~Text() {
 		TTF_CloseFont(font);
 	}; 
 }; 
-Text::Text(const char* text, const char* fontPath, int fontSize) : text(text), x(0), y(0){
+Text::Text(const char* text, const char* fontPath, int fontSize) : text(text), x(0), y(0), sur(nullptr){
 	font = TTF_OpenFont(fontPath, fontSize); 
 }; 
 
