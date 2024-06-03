@@ -11,16 +11,16 @@ class Snake
 private:
 	Snake_Ends* head; 
 	Snake_Ends* tail; 
-	std::vector<Snake_Body*> body;
-
-	void grow(SDL_Renderer* renderer); 
+	std::vector<Snake_Body*> body; 
 public:
 	Snake(SDL_Renderer* renderer);
 	~Snake();
 	void move();
-	bool checkCollision(); 
+	bool checkSelfCollision();
+	bool checkAppleCollision(Entity* apple); 
 	bool isOutOfBounds(); 
 	void changeDirection(char change); 
+	void grow();
 
 	Snake_Body* getHead() { return this->head; }; 
 

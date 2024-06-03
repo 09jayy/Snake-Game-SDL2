@@ -24,7 +24,7 @@ Snake::Snake(SDL_Renderer* renderer) {
 }
 
 void Snake::render() {
-	std::cout << "RENDER SNAKE" << "\n";
+	//std::cout << "RENDER SNAKE" << "\n";
 
 	head->render(Snake_Ends::getHeadTextures());
 
@@ -40,17 +40,37 @@ void Snake::move() {
 
 	if (body.size() >= 1) {
 		for (int i = body.size() - 1; i >= 1; i--) {
-			std::cout << "BODY " << i << " DIRECTION: " << body[i]->getDirection() << "\n";
+			//std::cout << "BODY " << i << " DIRECTION: " << body[i]->getDirection() << "\n";
 			body[i]->move(body[i - 1]); 
 		}
 	}
 
-	std::cout << "HEAD DIRECTION: " << head->getDirection() << "\n";
+	//std::cout << "HEAD DIRECTION: " << head->getDirection() << "\n";
 	head->moveHead(); 
 }
 
-bool Snake::checkCollision() {
-	return true; 
+bool Snake::checkSelfCollision() {
+	if (body.size() >= 1) {
+		for (int i = 1; i < body.size(); i++) {
+			if (head->getX() == body[i]->getX() && head->getY() == body[i]->getY()) {
+				std::cout << "COLLISION DETECTED FAIL" << "\n";
+				return true; 
+			}
+		}
+		if (head->getX() == tail->getX() && head->getY() == tail->getY()) {
+			std::cout << "COLLISION DETECTED FAIL" << "\n";
+			return true; 
+		}
+	}
+	return false;
+}
+
+bool Snake::checkAppleCollision(Entity* apple) {
+	if (head->getX() == apple->getX() && head->getY() == apple->getY()) {
+		std::cout << "COLLISION DETECTED" << "\n";
+		return true; 
+	}
+	return false;
 }
 
 bool Snake::isOutOfBounds(){
@@ -65,11 +85,17 @@ bool Snake::isOutOfBounds(){
 void Snake::changeDirection(char change) {
 	if (Snake_Body::getOpposite(change) != head->getDirection()) {
 		head->setDirection(change); 
-		std::cout<< "DIRECTION HAS CHANGED OF HEAD" << "\n";
+		//std::cout<< "DIRECTION HAS CHANGED OF HEAD" << "\n";
 	}
 }
  
-void Snake::grow(SDL_Renderer* renderer) {
+void Snake::grow() {
+
+	Snake_Body* newBody = new Snake_Body(tail->getX(), tail->getY(), 40, 40, "body");
+	newBody->setDirection(tail->getDirection());
+	body.push_back(newBody);
+
+
 }
 
 Snake::~Snake() {
