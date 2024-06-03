@@ -1,7 +1,8 @@
 #pragma once
 #include "Snake.h"
 #include "SDL.h"
-#include "Entity.h"
+#include "SDL_image.h"
+#include "Apple.h"
 
 class Game {
 private: 
@@ -12,7 +13,7 @@ private:
 
 	// sprites
 	Snake* snake; 
-	Entity* apple; 
+	Apple* apple;
 public:
 	Game();
 	~Game(); 

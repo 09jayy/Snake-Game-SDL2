@@ -1,6 +1,7 @@
-#include "Game.h" 
-#include "Snake.h" 
+#include "Game.h"
+#include "Snake.h"
 #include "Entity.h"
+#include "Apple.h"
 #include "SDL_image.h"
 #include <iostream>
 #include <string>
@@ -15,8 +16,6 @@ Game::~Game() {};
 
 void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen) {
 	int flags = 0;
-	const std::vector<const char*> HEAD_TEXTURES = {"assets/head_down.png", "assets/head_left.png", "assets/head_right.png", "assets/head_up.png"}; 
-	const std::vector<const char*> TAIL_TEXTURES = { "assets/tail_down.png", "assets/tail_left.png", "assets/tail_right.png", "assets/tail_down.png" }; 
 
 	if (fullscreen) {
 		flags = SDL_WINDOW_FULLSCREEN;
@@ -45,11 +44,12 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	}
 
 	// create apple
-	Game::apple = new Entity(100, 100, 40, 40, "apple");
-	apple->setTexture(renderer, "assets/apple.png"); 
+	Game::apple = new Apple(240, 240, 40, 40, "apple");
 
 	// create snake
 	Game::snake = new Snake(renderer); 
+
+	std::cout << "APPLE COORDS: " << apple->getX() << ", " << apple->getY() << "\n";
 };
 
 void Game::fail() {
@@ -93,14 +93,21 @@ void Game::handleEvents() {
 
 void Game::update() {
 	// move snake
-	if (!hasFailed){
-		snake->move(); 
+	if (!hasFailed) {
+		snake->move();
 	}
 
 	//check if the snake is out of bounds
-	if (snake->isOutOfBounds()) {
-		this->fail(); 
+	if (snake->isOutOfBounds() || snake->checkSelfCollision()) {
+		this->fail();
 	}
+
+	// check if snake has eaten apple
+
+	if (snake->checkAppleCollision(apple)) {
+		snake->grow();
+		apple->setRandPosition();
+	}; 
 }
 
 void Game::render() {
@@ -112,6 +119,7 @@ void Game::render() {
 
 	// render snake
 	snake->render();
+	//std::cout << "SNAKE COORDS: " << snake->getHead()->getX() << ", " << snake->getHead()->getY() << "\n";
 
 	if (hasFailed) {
 		Text gameOver("GAME OVER", "Minecraft.ttf", 48);

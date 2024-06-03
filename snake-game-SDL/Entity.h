@@ -8,8 +8,7 @@ class Entity {
 protected:
 	std::string name;  
 	int x, y; 
-	int width, height;
-private: 
+	int width, height; 
 	SDL_Texture* texture;
 public:
 	Entity(int x, int y, int width, int height);
@@ -21,9 +20,10 @@ public:
 
 	void render(SDL_Renderer* renderer);
 
-	int getX() { return x; };
-
+	int getX() { return x; }; 
 	int getY() { return y; };
+	int getWidth() { return width; };
+	int getHeight() { return height; };
 
 	void setX(int x) { this->x = x; };
 	void setY(int y) { this->y = y; }; 
