@@ -78,13 +78,12 @@ void Snake_Ends::moveHead() {
 		this->setX(getX() - MOVE_RATE);
 		break;
 	default:
+		curTexture = nullptr; 
 		break;
 	}
 };
 
-void Snake_Ends::render(Image_assets_ends textureStruct) {
-	setEndTexture(textureStruct);
-
+void Snake_Ends::render() {
 	SDL_Rect srcRect;
 	srcRect.x = 0;
 	srcRect.y = 0;

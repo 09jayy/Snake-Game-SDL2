@@ -28,6 +28,6 @@ public:
 
 	std::vector<Snake_Body*> getBody() { return this->body; }; 
 	
-	void render(); 
+	void render(bool hasFailed); 
 };
 

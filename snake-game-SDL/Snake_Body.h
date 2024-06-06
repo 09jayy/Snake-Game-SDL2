@@ -2,6 +2,7 @@
 #include "Entity.h"
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 
 struct Image_assets_body {
 	SDL_Texture* vertical;
@@ -34,10 +35,10 @@ public:
 	bool getDirectionChanged() { return directionChanged; };
 	void setDirectionChanged(bool newDirectionChanged) { directionChanged = newDirectionChanged; };
 	void setNextDirection(char newNextDirection) { nextDirection = newNextDirection; };
-
+	char getNextDirection() { return nextDirection; };
 
 	static char getOpposite(char direction);
-	void renderFirstBody(char headDirection); 
+	void setCurTexture(Snake_Body* frontBody ); 
 	void render(SDL_Texture* previousTexture);
 	void render(); 
 

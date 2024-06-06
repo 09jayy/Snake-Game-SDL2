@@ -118,7 +118,7 @@ void Game::render() {
 	apple->render(renderer);
 
 	// render snake
-	snake->render();
+	snake->render(hasFailed);
 	//std::cout << "SNAKE COORDS: " << snake->getHead()->getX() << ", " << snake->getHead()->getY() << "\n";
 
 	if (hasFailed) {

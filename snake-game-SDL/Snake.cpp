@@ -23,16 +23,20 @@ Snake::Snake(SDL_Renderer* renderer) {
 	std::cout << "tail created" << "\n"; 
 }
 
-void Snake::render() {
+void Snake::render(bool hasFailed) {
 	//std::cout << "RENDER SNAKE" << "\n";
 
-	head->render(Snake_Ends::getHeadTextures());
+	if (!hasFailed) { head->setEndTexture(Snake_Ends::getHeadTextures()); }; 
+	head->render();
 
 	for (int i = 1; i < body.size(); i++) {
+		if (!hasFailed) { body[i]->setCurTexture(body[i - 1]); };
 		body[i]->render(); 
 	}
 
-	tail->render(Snake_Ends::getTailTextures());
+	tail->setDirection(body[body.size() - 1]->getDirection()); 
+	if (!hasFailed) { tail->setEndTexture(Snake_Ends::getTailTextures()); }; 
+	tail->render();
 }
 
 void Snake::move() {
@@ -90,12 +94,10 @@ void Snake::changeDirection(char change) {
 }
  
 void Snake::grow() {
-
 	Snake_Body* newBody = new Snake_Body(tail->getX(), tail->getY(), 40, 40, "body");
-	newBody->setDirection(tail->getDirection());
+	newBody->setDirection(body[body.size() - 1]->getDirection());
+	newBody->setNextDirection(body[body.size() - 1]->getNextDirection()); 
 	body.push_back(newBody);
-
-
 }
 
 Snake::~Snake() {

@@ -29,7 +29,7 @@ public:
 
 	void setEndTexture(Image_assets_ends textureStruct); 
 
-	void render(Image_assets_ends textureStruct); 
+	void render(); 
 
 	~Snake_Ends(); 
 
