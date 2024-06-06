@@ -26,8 +26,8 @@ bool Apple::seedRandGen() {
 void Apple::setRandPosition() {
 	static bool seeded = seedRandGen();
 
-	int x = rand() % 21;
-	int y = rand() % 21;
+	int x = rand() % 20;
+	int y = rand() % 20;
 	this->setX(x * 40);
 	this->setY(y * 40);
 
