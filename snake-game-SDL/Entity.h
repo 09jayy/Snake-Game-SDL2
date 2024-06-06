@@ -15,8 +15,8 @@ public:
 
 	Entity(int x, int y, int width, int height, std::string objName);
 
-	void setTexture(SDL_Renderer* renderer, const char* texturePath); 
-	static SDL_Texture* createTextureFromPath(SDL_Renderer* renderer, const char* path); 
+	void setTexture(const char* texturePath); 
+	static SDL_Texture* createTextureFromPath(const char* path); 
 
 	void render();
 

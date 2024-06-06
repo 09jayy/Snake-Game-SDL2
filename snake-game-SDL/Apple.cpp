@@ -9,20 +9,14 @@
 #include <ctime>
 
 Apple::Apple(int x, int y, int width, int height, std::string name) : Entity(x, y, width, height, name) {
-	setTexture(Game::getRenderer(), "assets/apple.png");
+	setTexture("assets/apple.png");
 };
 
 Apple::Apple(int x, int y, int width, int height) : Entity(x, y, width, height) {
-	setTexture(Game::getRenderer(), "assets/apple.png");
+	setTexture("assets/apple.png");
 };
 
 Apple::~Apple() {};
-
-void Apple::setTexture(SDL_Renderer* renderer, const char* texturePath) {
-	SDL_Surface* surface = IMG_Load(texturePath);
-	texture = SDL_CreateTextureFromSurface(renderer, surface);
-	SDL_FreeSurface(surface);
-};
 
 bool Apple::seedRandGen() {
 	std::srand(static_cast<unsigned int>(std::time(nullptr)));

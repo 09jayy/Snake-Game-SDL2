@@ -16,9 +16,9 @@ Snake::Snake(SDL_Renderer* renderer) {
 	tail = new Snake_Ends(0, 400, WIDTH_HEIGHT, WIDTH_HEIGHT,"tail");  
 
 	body.push_back(head); 
-	body.push_back(new Snake_Body(80, 400, WIDTH_HEIGHT, WIDTH_HEIGHT, "body"));
-	body.push_back(new Snake_Body(40, 400, WIDTH_HEIGHT, WIDTH_HEIGHT, "body"));
-	body.push_back(new Snake_Body(0, 400, WIDTH_HEIGHT, WIDTH_HEIGHT, "body"));
+	//body.push_back(new Snake_Body(80, 400, WIDTH_HEIGHT, WIDTH_HEIGHT, "body"));
+	//body.push_back(new Snake_Body(40, 400, WIDTH_HEIGHT, WIDTH_HEIGHT, "body"));
+	//body.push_back(new Snake_Body(0, 400, WIDTH_HEIGHT, WIDTH_HEIGHT, "body"));
 
 	std::cout << "tail created" << "\n"; 
 }

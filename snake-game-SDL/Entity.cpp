@@ -21,15 +21,15 @@ Entity::Entity(int x, int y, int width, int height, std::string objName) {
 	this->texture = {}; 
 }
 
-void Entity::setTexture(SDL_Renderer* renderer, const char* texturePath) {
+void Entity::setTexture(const char* texturePath) {
 	SDL_Surface* surface = IMG_Load(texturePath);
-	texture = SDL_CreateTextureFromSurface(renderer, surface);
+	texture = SDL_CreateTextureFromSurface(Game::getRenderer(), surface);
 	SDL_FreeSurface(surface);
 }
 
-SDL_Texture* Entity::createTextureFromPath(SDL_Renderer* renderer, const char* path) {
+SDL_Texture* Entity::createTextureFromPath(const char* path) {
 	SDL_Surface* sur = IMG_Load(path);
-	SDL_Texture* tex = SDL_CreateTextureFromSurface(renderer, sur);
+	SDL_Texture* tex = SDL_CreateTextureFromSurface(Game::getRenderer(), sur);
 	SDL_FreeSurface(sur);
 	return tex;
 }; 

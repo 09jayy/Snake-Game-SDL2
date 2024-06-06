@@ -19,16 +19,16 @@ void Snake_Ends::setTextures() {
 
 	if (!headTextures.north) {
 		// STATIC HEAD TEXTURES
-		headTextures.north = Entity::createTextureFromPath(renderer, "assets/head_up.png");
-		headTextures.east = Entity::createTextureFromPath(renderer, "assets/head_right.png");
-		headTextures.south = Entity::createTextureFromPath(renderer, "assets/head_down.png");
-		headTextures.west = Entity::createTextureFromPath(renderer, "assets/head_left.png");
+		headTextures.north = Entity::createTextureFromPath("assets/head_up.png");
+		headTextures.east = Entity::createTextureFromPath("assets/head_right.png");
+		headTextures.south = Entity::createTextureFromPath("assets/head_down.png");
+		headTextures.west = Entity::createTextureFromPath("assets/head_left.png");
 
 		// STATIC TAIL TEXTURES
-		tailTextures.north = Entity::createTextureFromPath(renderer, "assets/tail_down.png");
-		tailTextures.east = Entity::createTextureFromPath(renderer, "assets/tail_left.png");
-		tailTextures.south = Entity::createTextureFromPath(renderer, "assets/tail_up.png");
-		tailTextures.west = Entity::createTextureFromPath(renderer, "assets/tail_right.png");
+		tailTextures.north = Entity::createTextureFromPath("assets/tail_down.png");
+		tailTextures.east = Entity::createTextureFromPath("assets/tail_left.png");
+		tailTextures.south = Entity::createTextureFromPath("assets/tail_up.png");
+		tailTextures.west = Entity::createTextureFromPath("assets/tail_right.png");
 	}; 
 
 	std::cout << "check head textures" << std::endl;

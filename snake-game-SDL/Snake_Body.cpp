@@ -23,12 +23,12 @@ Snake_Body::Snake_Body(int x, int y, int width, int height): Entity(x, y, width,
 
 void Snake_Body::setTextures() {
 	SDL_Renderer* renderer = Game::getRenderer();
-	textures.vertical = Entity::createTextureFromPath(renderer, "assets/body_vertical.png");
-	textures.horizontal = Entity::createTextureFromPath(renderer, "assets/body_horizontal.png");
-	textures.topleft = Entity::createTextureFromPath(renderer, "assets/body_topleft.png");
-	textures.topright = Entity::createTextureFromPath(renderer, "assets/body_topright.png");
-	textures.bottomleft = Entity::createTextureFromPath(renderer, "assets/body_bottomleft.png");
-	textures.bottomright = Entity::createTextureFromPath(renderer, "assets/body_bottomright.png"); 
+	textures.vertical = Entity::createTextureFromPath("assets/body_vertical.png");
+	textures.horizontal = Entity::createTextureFromPath("assets/body_horizontal.png");
+	textures.topleft = Entity::createTextureFromPath("assets/body_topleft.png");
+	textures.topright = Entity::createTextureFromPath("assets/body_topright.png");
+	textures.bottomleft = Entity::createTextureFromPath("assets/body_bottomleft.png");
+	textures.bottomright = Entity::createTextureFromPath("assets/body_bottomright.png"); 
 }; 
 
 void Snake_Body::move(Snake_Body* frontBody) {
