@@ -16,6 +16,6 @@ public:
 
 	void setPosition(int x, int y);
 	void setPosition(const char* position);
-	void render(SDL_Renderer* renderer);
+	void render();
 }; 
 

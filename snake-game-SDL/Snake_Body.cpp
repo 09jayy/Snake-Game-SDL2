@@ -8,13 +8,13 @@
 Image_assets_body Snake_Body::textures = { NULL, NULL, NULL, NULL, NULL, NULL };
 
 Snake_Body::~Snake_Body() {};
-Snake_Body::Snake_Body(int x, int y, int width, int height, const char* name) : Entity(x, y, width, height, name), directionChanged(false), direction('e'), curTexture(nullptr), nextDirection('e') {
+Snake_Body::Snake_Body(int x, int y, int width, int height, const char* name) : Entity(x, y, width, height, name), direction('e'), curTexture(nullptr), nextDirection('e') {
 	if (!textures.vertical) {
 		setTextures(); 
 	}
 	curTexture = textures.vertical;
 };
-Snake_Body::Snake_Body(int x, int y, int width, int height): Entity(x, y, width, height), directionChanged(false), direction('e'), curTexture(nullptr), nextDirection('e') {
+Snake_Body::Snake_Body(int x, int y, int width, int height): Entity(x, y, width, height), direction('e'), curTexture(nullptr), nextDirection('e') {
 	if (!textures.vertical) {
 		setTextures();
 	}
@@ -58,55 +58,42 @@ void Snake_Body::moveSwitchCase(Snake_Body* frontBody) {
 	};
 }; 
 
-void Snake_Body::setCurTexture(Snake_Body* frontBody) {
+void Snake_Body::syncDirectionTexture(Snake_Body* frontBody) {
 	direction = nextDirection; 
 	nextDirection = frontBody->getDirection();
-
-	std::cout << "Direction: " << direction << "\n";
-	std::cout << "Next Direction: " << nextDirection << "\n";
 	
 	if (direction == nextDirection) {
 		if (direction == 'n' || direction == 's') {
-			curTexture = textures.vertical;
-			std::cout << "Vertical" << "\n";
+			curTexture = textures.vertical;	
 		}
 		else {
 			curTexture = textures.horizontal;
-			std::cout << "Horizontal" << "\n";
 		}; 
 	}
 	else {
 		if (direction == 'n' && nextDirection == 'e') {
 			curTexture = textures.bottomright;
-			std::cout << "Top Left" << "\n";
 		}
 		else if (direction == 'n' && nextDirection == 'w') {
 			curTexture = textures.bottomleft;
-			std::cout << "Top Right" << "\n";
 		}
 		else if (direction == 's' && nextDirection == 'e') {
-			curTexture = textures.topright;
-			std::cout << "Bottom Left" << "\n";
+			curTexture = textures.topright; 
 		}
 		else if (direction == 's' && nextDirection == 'w') {
 			curTexture = textures.topleft;
-			std::cout << "Bottom Right" << "\n";
 		}
 		else if (direction == 'e' && nextDirection == 'n') {
 			curTexture = textures.topleft;
-			std::cout << "Bottom Left" << "\n";
 		}
 		else if (direction == 'e' && nextDirection == 's') {
 			curTexture = textures.bottomleft;
-			std::cout << "Top Left" << "\n";
 		}
 		else if (direction == 'w' && nextDirection == 'n') {
 			curTexture = textures.topright;
-			std::cout << "Bottom Right" << "\n";
 		}
 		else if (direction == 'w' && nextDirection == 's') {
 			curTexture = textures.bottomright;
-			std::cout << "Top Right" << "\n";
 		}
 		else {
 			std::cout << "INVALID DIRECTION" << "\n";
@@ -137,7 +124,6 @@ void Snake_Body::render(SDL_Texture* previousTexture) {
 
 void Snake_Body::setDirection(char newDirection) {
 	direction = newDirection;
-	directionChanged = true; 
 };
 
 char Snake_Body::getOpposite(const char direction) {

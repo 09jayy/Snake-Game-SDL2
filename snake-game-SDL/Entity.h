@@ -18,7 +18,7 @@ public:
 	void setTexture(SDL_Renderer* renderer, const char* texturePath); 
 	static SDL_Texture* createTextureFromPath(SDL_Renderer* renderer, const char* path); 
 
-	void render(SDL_Renderer* renderer);
+	void render();
 
 	int getX() { return x; }; 
 	int getY() { return y; };

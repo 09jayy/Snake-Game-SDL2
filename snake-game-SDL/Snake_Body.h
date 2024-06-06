@@ -16,7 +16,6 @@ struct Image_assets_body {
 class Snake_Body : public Entity {
 protected:
 	char direction; 
-	bool directionChanged; 
 	SDL_Texture* curTexture;
 private: 
 	 static Image_assets_body textures; 
@@ -32,13 +31,11 @@ public:
 	void setDirection(char newDirection); 
 	char getDirection() { return direction; }; 
 	SDL_Texture* getCurTexture() { return curTexture; }; 
-	bool getDirectionChanged() { return directionChanged; };
-	void setDirectionChanged(bool newDirectionChanged) { directionChanged = newDirectionChanged; };
 	void setNextDirection(char newNextDirection) { nextDirection = newNextDirection; };
 	char getNextDirection() { return nextDirection; };
 
 	static char getOpposite(char direction);
-	void setCurTexture(Snake_Body* frontBody ); 
+	void syncDirectionTexture(Snake_Body* frontBody ); 
 	void render(SDL_Texture* previousTexture);
 	void render(); 
 

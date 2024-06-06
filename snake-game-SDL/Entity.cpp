@@ -1,4 +1,5 @@
 #include "Entity.h"
+#include "Game.h"
 #include <iostream>
 #include <string>
 
@@ -33,7 +34,7 @@ SDL_Texture* Entity::createTextureFromPath(SDL_Renderer* renderer, const char* p
 	return tex;
 }; 
 
-void Entity::render(SDL_Renderer* renderer) {
+void Entity::render() {
 	SDL_Rect srcRect;
 	srcRect.x = 0;
 	srcRect.y = 0;
@@ -46,7 +47,7 @@ void Entity::render(SDL_Renderer* renderer) {
 	destRect.w = width;
 	destRect.h = height;
 
-	SDL_RenderCopy(renderer, texture, &srcRect, &destRect);
+	SDL_RenderCopy(Game::getRenderer(), texture, &srcRect, &destRect);
 }
 
 Entity::~Entity() {

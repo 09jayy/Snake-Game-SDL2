@@ -15,22 +15,21 @@ Snake::Snake(SDL_Renderer* renderer) {
 
 	tail = new Snake_Ends(0, 400, WIDTH_HEIGHT, WIDTH_HEIGHT,"tail");  
 
-	// add body test
 	body.push_back(head); 
-	body.push_back(new Snake_Body(80, 400, WIDTH_HEIGHT, WIDTH_HEIGHT, "body 1"));
-	body.push_back(new Snake_Body(40, 400, WIDTH_HEIGHT, WIDTH_HEIGHT, "body 2"));
+	body.push_back(new Snake_Body(80, 400, WIDTH_HEIGHT, WIDTH_HEIGHT, "body"));
+	body.push_back(new Snake_Body(40, 400, WIDTH_HEIGHT, WIDTH_HEIGHT, "body"));
+	body.push_back(new Snake_Body(0, 400, WIDTH_HEIGHT, WIDTH_HEIGHT, "body"));
 
 	std::cout << "tail created" << "\n"; 
 }
 
 void Snake::render(bool hasFailed) {
-	//std::cout << "RENDER SNAKE" << "\n";
 
 	if (!hasFailed) { head->setEndTexture(Snake_Ends::getHeadTextures()); }; 
 	head->render();
 
 	for (int i = 1; i < body.size(); i++) {
-		if (!hasFailed) { body[i]->setCurTexture(body[i - 1]); };
+		if (!hasFailed) { body[i]->syncDirectionTexture(body[i - 1]); };
 		body[i]->render(); 
 	}
 
@@ -44,12 +43,9 @@ void Snake::move() {
 
 	if (body.size() >= 1) {
 		for (int i = body.size() - 1; i >= 1; i--) {
-			//std::cout << "BODY " << i << " DIRECTION: " << body[i]->getDirection() << "\n";
 			body[i]->move(body[i - 1]); 
 		}
 	}
-
-	//std::cout << "HEAD DIRECTION: " << head->getDirection() << "\n";
 	head->moveHead(); 
 }
 
@@ -82,6 +78,7 @@ bool Snake::isOutOfBounds(){
 		return true;
 	}
 	else {
+		std::cout << head->getX() << ", " << head->getY() << "\n";
 		return false; 
 	}
 }
@@ -89,7 +86,6 @@ bool Snake::isOutOfBounds(){
 void Snake::changeDirection(char change) {
 	if (Snake_Body::getOpposite(change) != head->getDirection()) {
 		head->setDirection(change); 
-		//std::cout<< "DIRECTION HAS CHANGED OF HEAD" << "\n";
 	}
 }
  

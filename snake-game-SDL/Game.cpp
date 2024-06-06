@@ -115,7 +115,7 @@ void Game::render() {
 	SDL_RenderClear(renderer);  
 
 	// render apple
-	apple->render(renderer);
+	apple->render();
 
 	// render snake
 	snake->render(hasFailed);
@@ -124,7 +124,7 @@ void Game::render() {
 	if (hasFailed) {
 		Text gameOver("GAME OVER", "Minecraft.ttf", 48);
 		gameOver.setPosition("CENTER");
-		gameOver.render(renderer);
+		gameOver.render();
 	}
 
 	// present renderer buffer

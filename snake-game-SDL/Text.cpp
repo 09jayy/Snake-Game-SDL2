@@ -1,4 +1,5 @@
 #include "Text.h"
+#include "Game.h"
 
 Text::~Text() {
 	if (font) {
@@ -23,7 +24,9 @@ void Text::setPosition(const char* position) {
 	}
 }
 
-void Text::render(SDL_Renderer* renderer) {
+void Text::render() {
+	SDL_Renderer* renderer = Game::getRenderer(); 
+
 	//create texture
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, sur);
 	SDL_Rect rect = { x,y,sur->w, sur->h };
