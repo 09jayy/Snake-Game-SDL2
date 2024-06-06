@@ -13,3 +13,7 @@ This repository consists of a recreation of the classic game: Snake. The purpose
 - Visual Glitch when new body of snake is added
 - Game may not fail when new body of snake is added as the head moves out of bounds
 - Chance that the apple spawns in a location that is covered by the snake body
+
+## Credits
+
+Visual Assets: https://opengameart.org/content/snake-game-assets
