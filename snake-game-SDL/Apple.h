@@ -14,6 +14,8 @@ public:
 	~Apple();
 
 	void setTexture(SDL_Renderer* renderer, const char* texturePath);
-	void setRandPosition(); 
+	void setRandPosition();
+
+	static bool seedRandGen(); 
 };
 

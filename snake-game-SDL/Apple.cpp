@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string> 
 #include <cstdlib> 
+#include <ctime>
 
 Apple::Apple(int x, int y, int width, int height, std::string name) : Entity(x, y, width, height, name) {
 	setTexture(Game::getRenderer(), "assets/apple.png");
@@ -23,11 +24,18 @@ void Apple::setTexture(SDL_Renderer* renderer, const char* texturePath) {
 	SDL_FreeSurface(surface);
 };
 
+bool Apple::seedRandGen() {
+	std::srand(static_cast<unsigned int>(std::time(nullptr)));
+	return true;
+};
+
 void Apple::setRandPosition() {
-	int x = rand() % 20 * 40;
-	int y = rand() % 20 * 40;
-	this->setX(x);
-	this->setY(y);
+	static bool seeded = seedRandGen();
+
+	int x = rand() % 21;
+	int y = rand() % 21;
+	this->setX(x * 40);
+	this->setY(y * 40);
 
 	std::cout << "Apple position: " << x << ", " << y << "\n";
 };
